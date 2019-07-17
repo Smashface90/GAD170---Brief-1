@@ -17,7 +17,11 @@ public static class BattleHandler
     {
         //This needs to be replaced with some actual battle logic, at present 
         // we just award the maximum possible win to the player
+        Debug.Log("We’re fighting! We need to check some stats and set an outcome!");
+
         float outcome = 1;
+
+        Debug.Log("Outcome = 1, player maximum!");
 
         var results = new BattleResultEventData(data.player, data.npc, outcome);
 

@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 
     IEnumerator DanceOff()
     {
+        Debug.Log("Initiated dance off!");
+
         BattleEventData data = new BattleEventData(myStats, currentOpponent.myStats);
         GameEvents.BeginBattle(data);
         controller.enabled = false;
@@ -61,6 +63,8 @@ public class Player : MonoBehaviour
         BattleHandler.Battle(data);
         controller.enabled = true;
         currentOpponent.transform.LookAt(transform.position + Vector3.forward);
+
+        Debug.Log("Finished dance off!");
     }
 
     //Check for colliding with NPC, can then interact, 
@@ -71,6 +75,7 @@ public class Player : MonoBehaviour
             currentOpponent = other.GetComponent<NPC>();
             currentOpponent.uiCanvas.SetActive(true);
             GameEvents.EnteredBattleRange(new BattleEventData(myStats, currentOpponent.myStats));
+            Debug.Log("Entered NPC trigger range, you can press <SPACE> to dance!");
         }
     }
 
@@ -83,6 +88,7 @@ public class Player : MonoBehaviour
                 GameEvents.ExitedBattleRange(new BattleEventData(myStats, currentOpponent.myStats));
                 currentOpponent.uiCanvas.SetActive(false);
                 currentOpponent = null;
+                Debug.Log("Left battle trigger range!");
             }
         }
     }

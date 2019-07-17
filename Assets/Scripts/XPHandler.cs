@@ -25,5 +25,6 @@ public class XPHandler : MonoBehaviour
 
     public void GainXP(BattleResultEventData data)
     {
+        Debug.Log("Finished the fight, I need to add some XP!");
     }
 }

@@ -21,5 +21,7 @@ public class Stats : MonoBehaviour
     {
         //assign initial stats
         StatsGenerator.InitialStats(this);
+        Debug.Log("" + gameObject.name + ": " + level + " " + xp + " " + style + " " + luck + " " + rhythm);
+
     }
 }
