@@ -17,14 +17,42 @@ public class XPHandler : MonoBehaviour
 {
     private void OnEnable()
     {
+        GameEvents.OnBattleConclude += GainXP;
     }
 
     private void OnDisable()
     {
+        GameEvents.OnBattleConclude -= GainXP;
     }
 
     public void GainXP(BattleResultEventData data)
     {
         Debug.Log("Finished the fight, I need to add some XP!");
+        if (data.outcome >= 0)
+        {
+            data.player.xp += 50;
+            GameEvents.PlayerXPGain(50);
+            CheckForLevelling(data);
+        }
     }
+
+    public void CheckForLevelling(BattleResultEventData data)
+    {
+        if ((data.player.xp > 0) && (data.player.level <= 0))
+        {
+            data.player.level = 1;
+            GameEvents.PlayerLevelUp(1);
+        }
+        else if ((data.player.xp > 200) && (data.player.xp >= 200))
+        {
+            data.player.level += 1;
+            data.player.luck += 1;
+            data.player.style += 2;
+            data.player.rhythm += 3;
+            data.player.xp =0;
+        }
+
+    }
+        
+
 }

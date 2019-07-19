@@ -70,25 +70,27 @@ public class Player : MonoBehaviour
     //Check for colliding with NPC, can then interact, 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<NPC>())
+        Debug.Log("Entered NPC trigger range, you can press <SPACE> to dance!");
+
+        if (other.GetComponent<NPC>())
         {
             currentOpponent = other.GetComponent<NPC>();
             currentOpponent.uiCanvas.SetActive(true);
             GameEvents.EnteredBattleRange(new BattleEventData(myStats, currentOpponent.myStats));
-            Debug.Log("Entered NPC trigger range, you can press <SPACE> to dance!");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.GetComponent<NPC>())
+        Debug.Log("Left battle trigger range!");
+
+        if (other.GetComponent<NPC>())
         {
             if(other.GetComponent<NPC>() == currentOpponent)
             {
                 GameEvents.ExitedBattleRange(new BattleEventData(myStats, currentOpponent.myStats));
                 currentOpponent.uiCanvas.SetActive(false);
                 currentOpponent = null;
-                Debug.Log("Left battle trigger range!");
             }
         }
     }

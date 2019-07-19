@@ -19,7 +19,19 @@ public static class BattleHandler
         // we just award the maximum possible win to the player
         Debug.Log("We’re fighting! We need to check some stats and set an outcome!");
 
-        float outcome = 1;
+        float outcome = 0;
+        if (data.player.style > data.npc.style)
+        {
+            outcome = 1;
+        }
+        else if (data.player.style == data.npc.style)
+        {
+            outcome = 0;
+        }
+        else
+        {
+            outcome = -1;
+        }
 
         Debug.Log("Outcome = 1, player maximum!");
 
